@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Halaman Home</title>
+<title>Halaman Produk</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    body { background-color: #f8f9fa; }
-
     /* Navbar global */
     .navbar {
         background-color: #e9ecef !important; /* abu-abu lembut */
@@ -38,22 +36,30 @@
         border-radius: 2px;
     }
 
-    /* Halaman Home tetap semula */
-    h2 { font-weight: 700; font-size: 42px; margin-top: 2px; margin-left: 150px; }
+    .content { width: 80%; margin: 30px auto; }
+    .header-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    h2 { font-weight: 700; font-size: 38px; margin: 0; }
 
-    .offcanvas-body .nav-link {
-        font-weight: 600;
+    .table { border-collapse: collapse; text-align: left; width: 100%; }
+    .table th, .table td {
+        padding: 15px 25px;
+        border: 1px solid #fff;
     }
-    .offcanvas-body .nav-link.produk {
-        color: #6c757d;
+    .table th {
+        background-color: #d8e7fd;
+        font-weight: 700;
+        font-size: 20px; /* font header diperbesar */
     }
-    .offcanvas-body .nav-link.produk:hover {
-        color: #000;
+    .table td {
+        background-color: #d8e7fd;
+        font-weight: 600; /* sedikit lebih tipis dari header */
+        font-size: 18px;
     }
+    .table tr:hover td { background-color: #bcd0f7; }
+    .btn-primary { font-weight: 600; padding: 8px 18px; }
 </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg shadow-sm">
     <div class="container-fluid d-flex justify-content-between align-items-center px-3">
         <a class="navbar-brand" href="#">UTS Laravel</a>
@@ -63,29 +69,32 @@
     </div>
 </nav>
 
-<!-- Halaman Home -->
-<div class="py-3">
-    <h2>Halaman Home</h2>
-</div>
-
-<!-- Sidebar -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-bold">UTS Laravel</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+<div class="content">
+    <div class="header-section">
+        <h2>Halaman Produk</h2>
+        <a href="/tambahproduk" class="btn btn-primary">Tambah Produk</a>
     </div>
-    <div class="offcanvas-body">
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link fw-semibold" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link produk" href="/produk">Produk</a></li>
-        </ul>
 
-        <!-- Form Search -->
-        <form class="d-flex mt-3" role="search" action="/search" method="GET">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
+    <table class="table table-bordered table-hover align-middle table-sm">
+        <thead>
+            <tr>
+                <th>Kode Produk</th>
+                <th>Nama Produk</th>
+                <th>Jenis Produk</th>
+                <th>Harga</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($produk as $p)
+            <tr>
+                <td>{{ $p['kode'] }}</td>
+                <td>{{ $p['nama'] }}</td>
+                <td>{{ $p['jenis'] }}</td>
+                <td>{{ $p['harga'] }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
